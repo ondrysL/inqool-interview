@@ -1,0 +1,16 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+docs/Animal.md
+docs/DefaultApi.md
+docs/NewAnimal.md
+docs/NewUser.md
+docs/PartialAnimal.md
+docs/PartialUser.md
+docs/User.md
+git_push.sh
+index.ts
