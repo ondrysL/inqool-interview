@@ -11,6 +11,8 @@
     "openapi-gen": "pnpm dlx @openapitools/openapi-generator-cli generate -i ./openapi/openapi.yaml -g typescript-axios -o src/api/generated"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
+    "@radix-ui/react-checkbox": "^1.3.2",
     "@radix-ui/react-select": "^2.2.5",
     "@tailwindcss/vite": "^4.1.10",
     "@tanstack/react-query": "^5.80.10",
