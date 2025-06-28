@@ -98,7 +98,7 @@ export function TableRowInput<T extends FieldValues>({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(submit)} className={className}>
-        {columns.map((col, i) => (
+        {columns.map((col) => (
           <RenderInput<T> key={col.id} data={col} />
         ))}
       </form>
