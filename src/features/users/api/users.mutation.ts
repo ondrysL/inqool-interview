@@ -29,6 +29,24 @@ export const useDeleteUserMutation = () => {
   });
 };
 
+export const useDeleteUsersMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (ids: string[]) => {
+      await Promise.all(ids.map((id) => api.usersIdDelete(id)));
+    },
+    onSuccess: () => {
+      {
+        queryClient.invalidateQueries({
+          queryKey: usersKeys.list(),
+          refetchType: "active",
+        });
+      }
+    },
+  });
+};
+
 export const useUpdateUserMutation = (id: string) => {
   const queryClient = useQueryClient();
 
@@ -38,7 +56,10 @@ export const useUpdateUserMutation = (id: string) => {
     },
     onSuccess: () => {
       {
-        queryClient.invalidateQueries({ queryKey: usersKeys.list() });
+        queryClient.invalidateQueries({
+          queryKey: usersKeys.list(),
+          refetchType: "active",
+        });
       }
     },
   });
