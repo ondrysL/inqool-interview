@@ -2,24 +2,56 @@ import { useCreateUser, UserSchema, type User } from "@/features/users";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserForm } from "./userForm";
+import { Modal } from "../modal/modal";
+import { Button } from "../ui/button";
 
-export const NewUserForm = () => {
+export const NewUserForm = ({
+  isVisible,
+  resetFn,
+}: {
+  isVisible: boolean;
+  resetFn: () => void;
+}) => {
   const methods = useForm<User>({
     resolver: zodResolver(UserSchema),
+    defaultValues: {
+      name: "",
+      gender: "other",
+      banned: false,
+    },
   });
 
-  const { mutate } = useCreateUser();
+  const { mutateAsyncToast } = useCreateUser();
 
   const onSubmit = async (data: User) => {
-    mutate(data);
+    mutateAsyncToast(data);
+    resetFn();
+    methods.reset();
   };
 
+  if (!isVisible) {
+    return null;
+  }
+
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
-        <UserForm />
-        <button type="submit">Create User</button>
-      </form>
-    </FormProvider>
+    <Modal isOpen={isVisible} onClose={resetFn}>
+      <div>
+        <h1 className="font-bold text-xl">Add New User</h1>
+        <p className="text-muted-foreground">Add a new user into the database</p>
+      </div>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
+          <UserForm />
+          <div className="flex gap-x-2 items-center">
+            <Button variant="default" type="submit">
+              Create User
+            </Button>
+            <Button variant="outline" type="button" onClick={resetFn}>
+              Close
+            </Button>
+          </div>
+        </form>
+      </FormProvider>
+    </Modal>
   );
 };

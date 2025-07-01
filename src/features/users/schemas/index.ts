@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const UserSchema = z.object({
-  name: z.string(),
+  name: z.string({required_error: "Name is required"}).min(1, { message: "Name is required" }),
   banned: z.boolean({ required_error: "banned is required" }),
   gender: z.enum(["male", "female", "other"], {
     required_error: "gender is required",

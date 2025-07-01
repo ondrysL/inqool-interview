@@ -1,12 +1,14 @@
 import { api } from "@/api/client";
+import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usersKeys } from "./users.key";
 import type { PartialUser } from "@/api/generated";
+import { wrapWithToast } from "@/lib/utils";
 
 export const useCreateUserMutation = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: api.usersPost,
     onSuccess: () => {
       {
@@ -14,12 +16,20 @@ export const useCreateUserMutation = () => {
       }
     },
   });
+
+  const mutateAsyncToast = wrapWithToast(mutation.mutateAsync, {
+    pending: "Creating user...",
+    success: "User created successfully",
+    error: "Failed to create user",
+  });
+
+  return { ...mutation, mutateAsyncToast };
 };
 
 export const useDeleteUserMutation = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: api.usersIdDelete,
     onSuccess: () => {
       {
@@ -27,12 +37,20 @@ export const useDeleteUserMutation = () => {
       }
     },
   });
+
+  const mutateAsyncToast = wrapWithToast(mutation.mutateAsync, {
+    pending: "Creating user...",
+    success: "User created successfully",
+    error: "Failed to create user",
+  });
+
+  return { ...mutation, mutateAsyncToast };
 };
 
 export const useDeleteUsersMutation = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: async (ids: string[]) => {
       await Promise.all(ids.map((id) => api.usersIdDelete(id)));
     },
@@ -45,12 +63,20 @@ export const useDeleteUsersMutation = () => {
       }
     },
   });
+
+  const mutateAsyncToast = wrapWithToast(mutation.mutateAsync, {
+    pending: "Deleting users...",
+    success: "Users deleted successfully",
+    error: "Failed to delete users",
+  });
+
+  return { ...mutation, mutateAsyncToast };
 };
 
 export const useUpdateUserMutation = (id: string) => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: async (patchData: PartialUser) => {
       return api.usersIdPatch(id, patchData);
     },
@@ -63,4 +89,12 @@ export const useUpdateUserMutation = (id: string) => {
       }
     },
   });
+
+  const mutateAsyncToast = wrapWithToast(mutation.mutateAsync, {
+    pending: "Creating user...",
+    success: "User created successfully",
+    error: "Failed to create user",
+  });
+
+  return { ...mutation, mutateAsyncToast };
 };

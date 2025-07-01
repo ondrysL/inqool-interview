@@ -2,8 +2,16 @@ import { useDeleteUsers } from "@/features/users";
 import { DataTableActionBar } from "../data-table/data-table-action-bar";
 import type { Table } from "@tanstack/react-table";
 
-export function UserActionBar<T>({ table }: { table: Table<T> }) {
-  const { mutateAsync } = useDeleteUsers();
+export function UserActionBar<T>({
+  table,
+  editFn,
+  resetFn,
+}: {
+  table: Table<T>;
+  editFn: (user: T) => void;
+  resetFn: () => void;
+}) {
+  const { mutateAsyncToast } = useDeleteUsers();
 
   const rows = table
     .getSelectedRowModel()
@@ -13,9 +21,11 @@ export function UserActionBar<T>({ table }: { table: Table<T> }) {
     <DataTableActionBar
       count={table.getSelectedRowModel().rows.length}
       deleteFn={async () => {
-        await mutateAsync(rows);
+        await mutateAsyncToast(rows);
         table.resetRowSelection();
       }}
+      resetSelectionFn={resetFn}
+      editFn={() => editFn(table.getSelectedRowModel().rows[0].original)}
     />
   );
 }
