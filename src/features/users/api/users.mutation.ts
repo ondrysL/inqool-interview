@@ -1,5 +1,4 @@
 import { api } from "@/api/client";
-import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usersKeys } from "./users.key";
 import type { PartialUser } from "@/api/generated";

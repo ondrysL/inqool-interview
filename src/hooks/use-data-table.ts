@@ -1,4 +1,3 @@
-import type { User } from "@/features/users";
 import {
   getCoreRowModel,
   getFilteredRowModel,
