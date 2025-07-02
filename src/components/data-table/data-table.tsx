@@ -8,16 +8,27 @@ import {
   TableHeader,
 } from "../ui/table";
 import type { Table as TableType } from "@tanstack/react-table";
+import { cn } from "@/lib/utils";
 
 export interface DataTableProps<T> {
   table: TableType<T>;
   actionBar?: React.ReactNode;
+  className?: string;
 }
 
-export function DataTable<T>({ table, actionBar }: DataTableProps<T>) {
+export function DataTable<T>({
+  table,
+  actionBar,
+  className = "",
+}: DataTableProps<T>) {
   return (
     <>
-      <div className="rounded-md border bg-background text-primary">
+      <div
+        className={cn(
+          "rounded-md border bg-background text-primary",
+          className,
+        )}
+      >
         <Table className="table-auto">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

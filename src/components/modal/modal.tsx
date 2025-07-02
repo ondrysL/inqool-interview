@@ -10,7 +10,7 @@ interface ModalProps {
 export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="w-full max-w-xl" showCloseButton={false}>
+      <DialogContent className="w-full" showCloseButton={false}>
         {children}
       </DialogContent>
     </Dialog>

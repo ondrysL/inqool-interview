@@ -35,8 +35,7 @@ export const DataTableActionBar = ({
         <div className="flex justify-center items-center">
           <DeleteModal
             title={`Delete ${count} row(s)?`}
-            content="Are you sure? This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers."
+            content="Are you sure? This action cannot be undone."
             buttonText="Delete"
             deleteFn={deleteFn}
           >

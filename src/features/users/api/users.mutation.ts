@@ -38,9 +38,9 @@ export const useDeleteUserMutation = () => {
   });
 
   const mutateAsyncToast = wrapWithToast(mutation.mutateAsync, {
-    pending: "Creating user...",
-    success: "User created successfully",
-    error: "Failed to create user",
+    pending: "Deleting user...",
+    success: "User deleted successfully",
+    error: "Failed to delete user",
   });
 
   return { ...mutation, mutateAsyncToast };

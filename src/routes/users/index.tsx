@@ -1,5 +1,7 @@
+import { DataTableSkeleton } from "@/components/data-table/data-table-skeleton";
 import { UserDataTable } from "@/components/user-table/user-data-table";
 import { createFileRoute } from "@tanstack/react-router";
+import { Suspense } from "react";
 import z from "zod";
 
 const usersSearchSchema = z.object({
@@ -13,5 +15,9 @@ export const Route = createFileRoute("/users/")({
 });
 
 function RouteComponent() {
-  return <UserDataTable></UserDataTable>;
+  return (
+    <Suspense fallback={<DataTableSkeleton />}>
+      <UserDataTable></UserDataTable>
+    </Suspense>
+  );
 }

@@ -1,7 +1,6 @@
 import { useAnimals } from "@/features/animals";
 import { getAnimalColumns } from "@/hooks/get-animal-columns";
 import { useDataTable } from "@/hooks/use-data-table";
-import { Suspense } from "react";
 import { DataTableView } from "../data-table/data-table-view";
 import { DataTable } from "../data-table/data-table";
 import type { AnimalBase } from "@/features/animals/schemas";
@@ -30,7 +29,8 @@ export const AnimalDataTable = () => {
 
   return (
     <div className="p-2 flex flex-col gap-y-4">
-      <div className="flex items-center justify-between">
+      {/* Control Menu */}
+      <div className="flex items-center justify-between gap-2 flex-wrap">
         <div className="flex gap-2">
           <DataTableFilters table={table} />
           <DataTableView table={table} />
@@ -40,24 +40,26 @@ export const AnimalDataTable = () => {
           <span>Add New Animal</span>
         </Button>
       </div>
-      <Suspense fallback={<p>Loading...</p>}>
-        <DataTable
-          table={table}
-          actionBar={
-            <AnimalActionBar<AnimalBase>
-              table={table}
-              editFn={setUpdateEntity}
-              resetFn={resetUpdateEntity}
-            />
-          }
-        />
-      </Suspense>
 
+      {/* Table */}
+      <DataTable
+        table={table}
+        actionBar={
+          <AnimalActionBar<AnimalBase>
+            table={table}
+            editFn={setUpdateEntity}
+            resetFn={resetUpdateEntity}
+          />
+        }
+      />
+
+      {/* Modal */}
       <NewAnimalForm
         isVisible={newFormVisible}
         resetFn={() => setNewFormVisible(false)}
       />
 
+      {/* Modal */}
       <UpdateAnimalForm
         key={updateEntity?.id}
         id={updateEntity?.id ?? ""}

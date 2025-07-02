@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Building2, House, Menu, Panda, User, X } from "lucide-react";
+import { Building2, Menu, Panda, User, X } from "lucide-react";
 import { useState } from "react";
 
 export const Navbar = () => {
@@ -16,15 +16,19 @@ export const Navbar = () => {
             <X></X>
           </button>
           <div className="flex flex-col gap-y-4">
-            <Link to="/" className="flex gap-2 items-center">
-              <House className="size-5" />
-              <span>Home</span>
-            </Link>
-            <Link to="/users" className="flex gap-2 items-center">
+            <Link
+              to="/users"
+              className="flex gap-2 items-center"
+              activeProps={{ className: "underline underline-offset-5" }}
+            >
               <User className="size-5" />
               <span>User table</span>
             </Link>
-            <Link to="/animals" className="flex gap-2 items-center">
+            <Link
+              to="/animals"
+              className="flex gap-2 items-center"
+              activeProps={{ className: "underline underline-offset-5" }}
+            >
               <Panda className="size-5" />
               <span>Animal table</span>
             </Link>
@@ -45,15 +49,19 @@ export const Navbar = () => {
         </button>
 
         <div className="gap-4 hidden md:flex">
-          <Link to="/" className="flex gap-2 items-center">
-            <House className="size-4" />
-            <span>Home</span>
-          </Link>
-          <Link to="/users" className="flex gap-2 items-center">
+          <Link
+            to="/users"
+            className="flex gap-2 items-center"
+            activeProps={{ className: "underline underline-offset-5" }}
+          >
             <User className="size-4" />
             <span>User table</span>
           </Link>
-          <Link to="/animals" className="flex gap-2 items-center">
+          <Link
+            to="/animals"
+            className="flex gap-2 items-center"
+            activeProps={{ className: "underline underline-offset-5" }}
+          >
             <Panda className="size-4" />
             <span>Animal table</span>
           </Link>
