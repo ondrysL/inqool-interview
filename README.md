@@ -52,3 +52,9 @@ export default tseslint.config({
   },
 })
 ```
+
+# Getting Started
+```
+pnpm install
+pnpm run dev
+```
