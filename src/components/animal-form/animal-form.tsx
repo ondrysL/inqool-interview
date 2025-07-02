@@ -6,9 +6,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Switch } from "../ui/switch";
+import { Input } from "../ui/input";
 
-export const UserForm = () => {
+export const AnimalForm = () => {
   const {
     register,
     control,
@@ -21,7 +21,7 @@ export const UserForm = () => {
         <label htmlFor="name" className="block font-bold">
           Name:
         </label>
-        <input
+        <Input
           type="text"
           className="w-full border border-border px-4 py-2 rounded-lg"
           {...register("name")}
@@ -35,7 +35,7 @@ export const UserForm = () => {
       </div>
 
       <Controller
-        name="gender"
+        name="type"
         control={control}
         render={({ field }) => {
           return (
@@ -48,8 +48,8 @@ export const UserForm = () => {
                   <SelectValue placeholder="Select a gender" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="female">Female</SelectItem>
-                  <SelectItem value="male">Male</SelectItem>
+                  <SelectItem value="cat">Cat</SelectItem>
+                  <SelectItem value="dog">Dog</SelectItem>
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
@@ -57,25 +57,23 @@ export const UserForm = () => {
           );
         }}
       ></Controller>
-      <Controller
-        name="banned"
-        control={control}
-        render={({ field }) => (
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col">
-              <p className="font-bold">Banned status</p>
-              <span className="text-sm text-muted-foreground">
-                Toggle to ban this user
-              </span>
-            </div>
-            <Switch
-              checked={field.value}
-              onCheckedChange={field.onChange}
-              className="h-5 cursor-pointer"
-            />
-          </div>
+
+      <div>
+        <label htmlFor="Age" className="block font-bold">
+          Age:
+        </label>
+        <Input
+          type="number"
+          className="w-full border border-border px-4 py-2 rounded-lg"
+          {...register("age")}
+          placeholder="Enter name of the user..."
+        />
+        {errors.age?.message && (
+          <p className="mt-1 text-sm text-red-500">
+            {errors.age.message ?? ""}
+          </p>
         )}
-      />
+      </div>
     </div>
   );
 };

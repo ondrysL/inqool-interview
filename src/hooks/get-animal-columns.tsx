@@ -1,13 +1,12 @@
-import type { User } from "@/api/generated";
+import { AnimalActionCell } from "@/components/animal-table/animal-action-cell";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { Checkbox } from "@/components/ui/checkbox";
-import { UserActionCell } from "@/components/user-table/user-action-cell";
-import { cn } from "@/lib/utils";
+import type { AnimalBase } from "@/features/animals/schemas";
 import type { ColumnDef } from "@tanstack/react-table";
 
-export const getUserColumns = (
-  editStateFn: (value: User) => void,
-): ColumnDef<User>[] => {
+export const getAnimalColumns = (
+  editStateFn: (value: AnimalBase) => void,
+): ColumnDef<AnimalBase>[] => {
   return [
     {
       id: "select",
@@ -52,32 +51,26 @@ export const getUserColumns = (
     },
     {
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Banned" />
+        <DataTableColumnHeader column={column} title="Type" />
       ),
-      accessorKey: "banned",
-      cell: (info) => (
-        <span
-          className={cn(
-            "px-2 py-1 rounded-md text-white",
-            info.getValue() ? "bg-red-400" : "bg-green-500",
-          )}
-        >
-          {info.getValue() ? "Banned" : "Not banned"}
-        </span>
-      ),
+      accessorKey: "type",
+      cell: (info) => info.getValue(),
     },
     {
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Gender" />
+        <DataTableColumnHeader column={column} title="Age" />
       ),
-      accessorKey: "gender",
+      accessorKey: "age",
       cell: (info) => info.getValue(),
     },
     {
       id: "actions",
       header: "Actions",
       cell: (info) => (
-        <UserActionCell user={info.row.original} editStateFn={editStateFn} />
+        <AnimalActionCell
+          animal={info.row.original}
+          editStateFn={editStateFn}
+        />
       ),
     },
   ];

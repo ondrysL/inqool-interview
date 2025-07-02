@@ -90,9 +90,9 @@ export const useUpdateUserMutation = (id: string) => {
   });
 
   const mutateAsyncToast = wrapWithToast(mutation.mutateAsync, {
-    pending: "Creating user...",
-    success: "User created successfully",
-    error: "Failed to create user",
+    pending: "Updating user...",
+    success: "User updated successfully",
+    error: "Failed to update user",
   });
 
   return { ...mutation, mutateAsyncToast };

@@ -1,29 +1,28 @@
-import { useCreateUser, UserSchema, type User } from "@/features/users";
-import { FormProvider, useForm } from "react-hook-form";
+import { useCreateAnimal } from "@/features/animals";
+import {
+  AnimalCreateSchema,
+  type AnimalCreate,
+} from "@/features/animals/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserForm } from "./userForm";
-import { Modal } from "../modal/modal";
+import { FormProvider, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
+import { AnimalForm } from "./animal-form";
+import { Modal } from "../modal/modal";
 
-export const NewUserForm = ({
+export const NewAnimalForm = ({
   isVisible,
   resetFn,
 }: {
   isVisible: boolean;
   resetFn: () => void;
 }) => {
-  const methods = useForm<User>({
-    resolver: zodResolver(UserSchema),
-    defaultValues: {
-      name: "",
-      gender: "other",
-      banned: false,
-    },
+  const methods = useForm<AnimalCreate>({
+    resolver: zodResolver(AnimalCreateSchema),
   });
 
-  const { mutateAsyncToast } = useCreateUser();
+  const { mutateAsyncToast } = useCreateAnimal();
 
-  const onSubmit = async (data: User) => {
+  const onSubmit = async (data: AnimalCreate) => {
     mutateAsyncToast(data);
     resetFn();
     methods.reset();
@@ -37,14 +36,16 @@ export const NewUserForm = ({
     <Modal isOpen={isVisible} onClose={resetFn}>
       <div>
         <h1 className="font-bold text-xl">Add New User</h1>
-        <p className="text-muted-foreground">Add a new user into the database</p>
+        <p className="text-muted-foreground">
+          Add a new animal into the database
+        </p>
       </div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
-          <UserForm />
+          <AnimalForm />
           <div className="flex gap-x-2 items-center">
             <Button variant="default" type="submit">
-              Create User
+              Create Animal
             </Button>
             <Button variant="outline" type="button" onClick={resetFn}>
               Close

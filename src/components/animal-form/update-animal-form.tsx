@@ -1,35 +1,35 @@
+import { useUpdateAnimal } from "@/features/animals";
 import {
-  UpdateUserSchema,
-  useUpdateUser,
-  type UpdateUser,
-} from "@/features/users";
+  AnimalUpdateSchema,
+  type AnimalUpdate,
+} from "@/features/animals/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { UserForm } from "./userForm";
-import { Modal } from "../modal/modal";
+import { AnimalForm } from "./animal-form";
 import { Button } from "../ui/button";
+import { Modal } from "../modal/modal";
 
-export interface UpdateUserFormProps {
+export interface UpdateAnimalFormProps {
   id: string;
-  defaultValues: UpdateUser;
+  defaultValues: AnimalUpdate;
   isVisible: boolean;
   resetFn: () => void;
 }
 
-export const UpdateUserForm = ({
+export const UpdateAnimalForm = ({
   id,
   defaultValues,
   isVisible,
   resetFn,
-}: UpdateUserFormProps) => {
-  const methods = useForm<UpdateUser>({
-    resolver: zodResolver(UpdateUserSchema),
+}: UpdateAnimalFormProps) => {
+  const methods = useForm<AnimalUpdate>({
+    resolver: zodResolver(AnimalUpdateSchema),
     defaultValues,
   });
 
-  const { mutateAsyncToast } = useUpdateUser(id);
+  const { mutateAsyncToast } = useUpdateAnimal(id);
 
-  const onSubmit = async (data: UpdateUser) => {
+  const onSubmit = async (data: AnimalUpdate) => {
     mutateAsyncToast(data);
     resetFn();
   };
@@ -42,16 +42,14 @@ export const UpdateUserForm = ({
     <Modal isOpen={isVisible} onClose={resetFn}>
       <div>
         <h1 className="font-bold text-xl">Add New User</h1>
-        <p className="text-muted-foreground">
-          Update user into the database
-        </p>
+        <p className="text-muted-foreground">Update user into the database</p>
       </div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
-          <UserForm />
+          <AnimalForm />
           <div className="flex gap-x-2 items-center">
             <Button variant="default" type="submit">
-              Update User
+              Update Animal
             </Button>
             <Button variant="outline" type="button" onClick={resetFn}>
               Close

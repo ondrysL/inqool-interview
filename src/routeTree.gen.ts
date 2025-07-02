@@ -10,43 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as IdkIndexRouteImport } from './routes/idk/index'
+import { Route as UsersIndexRouteImport } from './routes/users/index'
+import { Route as AnimalsIndexRouteImport } from './routes/animals/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IdkIndexRoute = IdkIndexRouteImport.update({
-  id: '/idk/',
-  path: '/idk/',
+const UsersIndexRoute = UsersIndexRouteImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnimalsIndexRoute = AnimalsIndexRouteImport.update({
+  id: '/animals/',
+  path: '/animals/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/idk': typeof IdkIndexRoute
+  '/animals': typeof AnimalsIndexRoute
+  '/users': typeof UsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/idk': typeof IdkIndexRoute
+  '/animals': typeof AnimalsIndexRoute
+  '/users': typeof UsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/idk/': typeof IdkIndexRoute
+  '/animals/': typeof AnimalsIndexRoute
+  '/users/': typeof UsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/idk'
+  fullPaths: '/' | '/animals' | '/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/idk'
-  id: '__root__' | '/' | '/idk/'
+  to: '/' | '/animals' | '/users'
+  id: '__root__' | '/' | '/animals/' | '/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  IdkIndexRoute: typeof IdkIndexRoute
+  AnimalsIndexRoute: typeof AnimalsIndexRoute
+  UsersIndexRoute: typeof UsersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,11 +68,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/idk/': {
-      id: '/idk/'
-      path: '/idk'
-      fullPath: '/idk'
-      preLoaderRoute: typeof IdkIndexRouteImport
+    '/users/': {
+      id: '/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/animals/': {
+      id: '/animals/'
+      path: '/animals'
+      fullPath: '/animals'
+      preLoaderRoute: typeof AnimalsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -70,7 +87,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  IdkIndexRoute: IdkIndexRoute,
+  AnimalsIndexRoute: AnimalsIndexRoute,
+  UsersIndexRoute: UsersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

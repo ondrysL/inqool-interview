@@ -17,7 +17,7 @@ export interface DataTableProps<T> {
 export function DataTable<T>({ table, actionBar }: DataTableProps<T>) {
   return (
     <>
-      <div className="rounded-md border">
+      <div className="rounded-md border bg-background text-primary">
         <Table className="table-auto">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

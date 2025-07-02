@@ -1,7 +1,7 @@
 import { useDeleteUserMutation } from "../api/users.mutation";
 
 export const useDeleteUser = () => {
-  const { mutateAsync } = useDeleteUserMutation();
+  const mutation = useDeleteUserMutation();
 
-  return { mutateAsync };
+  return { ...mutation };
 };
