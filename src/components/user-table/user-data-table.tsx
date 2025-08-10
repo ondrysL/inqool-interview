@@ -36,7 +36,7 @@ export const UserDataTable = () => {
         </div>
         <Button variant="default" onClick={() => setNewFormVisible(true)}>
           <Plus />
-          <span>Add New User</span>
+          <span>Add New user!</span>
         </Button>
       </div>
 

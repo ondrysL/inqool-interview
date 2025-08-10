@@ -17,7 +17,7 @@ export function UserFilters<T>({ table }: { table: Table<T> }) {
         }}
       >
         <SlidersHorizontal className="size-3" />
-        <span>Reset</span>
+        <span>Reset!</span>
       </Button>
     </div>
   );

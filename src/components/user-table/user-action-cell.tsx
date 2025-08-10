@@ -26,7 +26,7 @@ export const UserActionCell = ({
             <SquarePen className="size-4" />
           </button>
         </TooltipTrigger>
-        <TooltipContent>Edit {user.name} user.</TooltipContent>
+        <TooltipContent>Edit {user.name} user!</TooltipContent>
       </Tooltip>
       <Tooltip>
         <TooltipTrigger>

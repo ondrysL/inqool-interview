@@ -26,6 +26,7 @@ export function UserActionBar<T extends { id: string }>({
         resetSelectionFn={resetFn}
         editFn={() => editFn(table.getSelectedRowModel().rows[0].original)}
       />
+      idk
     </div>
   );
 }
